@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+    <style>
+        td {
+            border: 1px solid #000;
+        }
+        table {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<h1>Student List</h1>
+<div th:replace="fragments :: navigator"></div>
+<br/>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Wzrost</th>
+        <th>Pelnoletni</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${listOfStudents}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.imie}"></td>
+        <td th:text="${student.nazwisko}"></td>
+        <td th:text="${student.wzrost}"></td>
+        <td th:text="${student.pelnoletni}"></td>
+        <td>
+            <a th:href="@{/student/edit(stud_id=${student.id})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{'/student/edit/'+${student.id}}">Edit2</a>
+        </td>
+        <td>
+            <a th:href="@{'/student/delete/'+${student.id}}">Delete</a>
+        </td>
+        <td>
+            <a th:href="@{/student/details(studentIdentifier=${student.id})}">Details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

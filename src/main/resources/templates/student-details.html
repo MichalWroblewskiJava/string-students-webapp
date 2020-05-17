@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+</head>
+<body>
+<h1>Details of a student with id <span th:text="${studentDetails.id}"></span></h1>
+<!--Wklejam navigator-->
+<div th:replace="fragments :: navigator"></div>
+<br/>
+<table>
+    <tr>
+        <td>Id:</td>
+        <td th:text="${studentDetails.id}"></td>
+    </tr>
+    <tr>
+        <td>Imie:</td>
+        <td th:text="${studentDetails.imie}"></td>
+    </tr>
+    <tr>
+        <td>Nazwisko:</td>
+        <td th:text="${studentDetails.nazwisko}"></td>
+    </tr>
+    <tr>
+        <td>Wzrost:</td>
+        <td th:text="${studentDetails.wzrost}"></td>
+    </tr>
+    <tr>
+        <td>Pełnoletni:</td>
+        <td th:text="${studentDetails.pelnoletni}"></td>
+    </tr>
+</table>
+<br/>
+<a th:href="@{/grade/add(student_id=${studentDetails.id})}">Dodaj ocenę (temu studentowi)</a>
+<table style="border: 1px solid">
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>Przedmiot</td>
+        <td>Ocena</td>
+        <td>Data dodania</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ocena : ${studentDetails.gradeList}">
+        <td th:text="${ocena.id}"></td>
+        <td th:text="${ocena.przedmiot}"></td>
+        <td th:text="${ocena.ocena}"></td>
+        <td th:text="${ocena.dataDodania}"></td>
+        <td>
+            <a th:href="@{/grade/edit(gradeId=${ocena.id})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/grade/delete(gradeId=${ocena.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
